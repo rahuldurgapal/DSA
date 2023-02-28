@@ -1,6 +1,10 @@
 #include<stdio.h>
-int main()
+void main()
 {
-    printf("Hello World");
-    return 0;
+     int i,n,m,power=1;
+    printf("enter the number and power");
+    scanf("%d%d",&n,&m);
+    for(i=1;i<=m;i++)
+    power*=1;
+    printf("%d",power);
 }
