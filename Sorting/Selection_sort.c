@@ -3,7 +3,7 @@ int min(int [],int , int );
 int main()
 {
 
-   int a[]={24,11,67,8,19,45,55,32,41,27};
+   int a[]={99,88,77,66,55,44,33,22,11,9};
    int k,loc,temp;
    for(k=0;k<9;k++)
    {
