@@ -60,7 +60,7 @@ int main()
     struct arrayStack *stack;
     stack=createStack(4);
     while(1)
-    {
+    {   
         system("clear");
         printf("1. Push\n");
         printf("2. Pop\n");
