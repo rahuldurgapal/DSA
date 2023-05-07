@@ -41,6 +41,7 @@ char infix_to_postfix:: pop()
         item =stk[top];
         top--;
     }
+    return item;
 }
 
 int preced(char ch)
@@ -59,7 +60,7 @@ void infix_to_postfix:: in_to_post(char infix[])
     int len;
     static int index=0,pos=0;
     char symbol,temp;
-    char postfix[40];
+    char postfix[50];
     len=strlen(infix);
     push('#');
 
@@ -113,7 +114,7 @@ void infix_to_postfix:: in_to_post(char infix[])
 int main()
 {
     infix_to_postfix s;
-    char infx[30];
+    char infx[40];
     cout<<"Enter the infix expression\n";
     cin>>infx;
     s.in_to_post(infx);
