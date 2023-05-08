@@ -20,10 +20,19 @@ struct Queue* createQueue(int cap)
     return q;
 }
 
-int isEmptyQueue(struct Queue* q)
+struct Queue* deleteQueue(struct Queue *q)
+{
+    free(q->arr);
+    free(q);
+
+    return NULL;
+}
+
+
+int isEmptyQueue(struct Queue *q)
 {
   if(q->front==-1)
-   return 1;
+      return 1;
   else
    return 0;
 }
@@ -122,19 +131,84 @@ void enQueue(struct Queue *q, int val)
     }
 }
 
+void deQueue(struct Queue *q)
+{
+   int i,j,size=0;
+
+
+   if(isEmptyQueue(q)){
+    printf("Queue is Empty");
+    return;
+   }
+
+   else if(q->front==q->rear)
+    q->front=-1, q->rear=-1;
+
+   else if(q->front==q->capacity-1)
+    q->front=0;
+
+   else 
+    q->front=q->front+1;
+
+    if(q->front>-1)
+    {
+        for(i=q->front;i!=q->rear;)
+        {
+            size++;
+            if(i==q->capacity-1)
+               i=0;
+            else
+             i++;
+        }
+        size++;
+    }
+    if(size==q->capacity/2)
+     halfQueue(q);
+}
+
+int menu()
+{
+    int choice;
+    // system("clear");
+    printf("\n1. See the Status of Queue");
+    printf("\n2. Insert a data in Queue");
+    printf("\n3. Remove a data from Queue");
+    printf("\n4. End Program");
+    printf("\n\nEnter Your Choice\n");
+    scanf("%d",&choice);
+    return choice;
+
+
+}
+
 int main()
 {
     struct Queue *q;
     q=createQueue(4);
-    enQueue(q,12);
-    printf("\ncapacity is %d front=%d rear=%d",q->capacity,q->front,q->rear);
-    enQueue(q,3);
-    printf("\ncapacity is %d front=%d rear=%d",q->capacity,q->front,q->rear);
-    enQueue(q,15);
-    printf("\ncapacity is %d front=%d rear=%d",q->capacity,q->front,q->rear); 
-    enQueue(q,20);
-    printf("\ncapacity is %d front=%d rear=%d",q->capacity,q->front,q->rear);
-    enQueue(q,42);
-    printf("\ncapacity is %d front=%d rear=%d",q->capacity,q->front,q->rear);
+    while(1)
+    {
+        switch(menu())
+        {
+            case 1:
+               printf("\nCapacity: %d",queueCapacity(q));
+               printf("\nFront= %d  Rear= %d",q->front,q->rear);
+               break;
+            case 2:
+               int value;
+               printf("\nEnter a number\n");
+               scanf("%d",&value);
+               enQueue(q,value);
+               break;
+            case 3:
+               deQueue(q);
+               break;
+            case 4:
+                  q=deleteQueue(q);
+                  exit(0);
+            default:
+              printf("Invalid Choice, Retry");
+        }
+    }
+
     return 0;
 }
