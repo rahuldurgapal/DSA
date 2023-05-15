@@ -15,9 +15,9 @@ struct node* createNode()
     return n;
 }
 
-void insertNode()
+void insertAtFirst()
 {
-   struct node *temp,*t;
+    struct node *temp,*t;
    temp=createNode();
    printf("Enter a number\n");
    scanf("%d",&temp->info);
@@ -27,13 +27,29 @@ void insertNode()
     start=temp;
 
   else{
-     t=start;
-     while(t->link!=NULL)
-        t=t->link;
-
-    t->link=temp;
+      temp->link=start;
+      start=temp;
   }
 }
+// void insertNode()
+// {
+//    struct node *temp,*t;
+//    temp=createNode();
+//    printf("Enter a number\n");
+//    scanf("%d",&temp->info);
+//    temp->link=NULL;
+
+//    if(start==NULL)
+//     start=temp;
+
+//   else{
+//      t=start;
+//      while(t->link!=NULL)
+//         t=t->link;
+
+//     t->link=temp;
+//   }
+// }
 
 void deleteNode()
 {
@@ -84,7 +100,7 @@ int main()
         switch(menu())
         {
             case 1:
-                insertNode();
+                insertAtFirst();
                 break;
             case 2:
                 deleteNode();
