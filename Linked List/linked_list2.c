@@ -57,6 +57,25 @@ void insertAtend()
    }
 }
 
+void insertAtPosition()
+{
+    int pos,i=1;
+    printf("Enter the position where you want data is store\n");
+    scanf("%d",&pos);
+    struct list *temp,*ptr,*p;
+    temp=createNode();
+    printf("Enter the data\n");
+    scanf("%d",&temp->data);
+    ptr=start;
+    while(i<pos)
+    {
+        p=ptr;
+        ptr=ptr->next;
+        i++;
+    }
+    temp->next=ptr;
+    p->next=temp;
+}
 void deleteAtbegin()
 {
     struct list *temp;
@@ -87,6 +106,22 @@ void deleteAtend()
    }
 }
 
+void deleteAtPosition()
+{
+    int pos,i=1;
+    printf("Enter the position where you want delete the data\n");
+    scanf("%d",&pos);
+    struct list *temp,*ptr;
+    temp=start;
+    while(i<pos)
+    {
+       ptr=temp;
+       temp=temp->next;
+       i++;
+    }
+    ptr->next=temp->next;
+    free(temp);
+}
 void viewList()
 {
     struct list *temp;
@@ -112,10 +147,12 @@ int main()
 
       printf("\n1. Insert Data at Begin\n");
       printf("2. Insert Data at End\n");
-      printf("3. Delete at Begin\n");
-      printf("4. Delete at End\n");
-      printf("5. View List\n");
-      printf("6. Exit\n");
+      printf("3. Insert At Given Position\n");
+      printf("4. Delete at Begin\n");
+      printf("5. Delete at End\n");
+      printf("6. Delete at Given Position\n");
+      printf("7. View List\n");
+      printf("8. Exit\n");
       printf("\n Enter Your Choice\n");
       scanf("%d",&ch);
       
@@ -128,20 +165,25 @@ int main()
               insertAtend();
               break;
           case 3:
+              insertAtPosition();
+              break;
+          case 4:
               deleteAtbegin();
               break;
-         case 4:
+         case 5:
               deleteAtend();
               break;
-         case 5:
+         case 6:
+               deleteAtPosition();
+               break;
+         case 7:
               viewList();
               getchar();
               break;
-        case 6:
+        case 8:
               exit(0);
          default:
               printf("Invalid choice");
-              getchar();
       }
     }
     return 0;
