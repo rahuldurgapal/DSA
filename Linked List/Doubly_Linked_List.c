@@ -6,6 +6,33 @@ struct node{
     struct node *next;
 };
 
+void insertAtbegin(struct node **, int);
+void insertAtend(struct node **,int);
+void insertAfter(structn node **, struct node*, int);
+struct node* find(struct node **,int);
+
+
+struct node* find(struct node **s, int data)
+{
+    if(*s==NULL)
+     printf("List is Empty");
+
+    else{
+      struct node *t;
+      t=*s;
+      while(t!=NULL)
+      {
+        if(t->info==data)
+         return t;
+
+       t=t->next;
+      }
+
+      return NULL;
+    }
+}
+
+
 void insertAtbegin(struct node **s, int data)
 {
     struct node *p;
@@ -41,10 +68,31 @@ void insertAtend(struct node **s, int data)
    temp->next=p;
    }
 }
+
+void insertAfter(struct node **s, struct node *p,int data)
+{
+  if(p==NULL)
+   printf("Invalid insertion");
+  else{
+    struct node *n;
+    n=(struct node*)malloc(sizeof(struct node));
+    n->info=data;
+    n->prev=p;
+    n->next=p->next;
+    if(p->next!=NULL)
+     p->next->prev=n;
+
+    p->next=n;  
+  }
+}
+
+
 int main()
 {
-    struct node *start=NULL;
+    struct node *start=NULL,*p;
+    p=find(&start,20);
     insertAtbegin(&start,10)
     insertAtend(&start,15);
+    insertAfter(&start,p,30);
     return 0;
 }
