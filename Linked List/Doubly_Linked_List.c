@@ -12,6 +12,9 @@ void insertAfter(structn node **, struct node*, int);
 struct node* find(struct node **,int);
 int deleteFirst(struct node **);
 int deleteLast(struct node **);
+int deleteIntermidiate(struct node **, struct node*);
+void viewList(struct node**);
+int getFirst(struct node **);
 
 
 struct node* find(struct node **s, int data)
@@ -123,14 +126,86 @@ int deleteLast(struct node **s)
   return 1;
 }
 
+
+
+
+int deleteIntermidiate(struct node **s, struct node *ptr)
+{
+  struct node *t;
+  if(*s==NULL)
+   return 0;
+  else if(ptr->next==NULL)
+  {
+    *s=NULL;
+    free(ptr);
+  }
+  else if(ptr->prev==NULL)
+  {
+    *s=ptr->next;
+    *s->prev=NULL;
+    free(ptr);
+  } 
+  else if(ptr->next==NULL)
+  {
+    ptr->prev->next=NULL;
+    free(ptr);
+  }
+  else{
+    ptr->prev->next=ptr->next;
+    ptr->next->prev=ptr->prev;
+    free(ptr);
+  }
+  return 1;
+}
+
+void viewList(struct node **s)
+{
+  struct node *t;
+  if(*s==NULL)
+   printf("List is Empty");
+  else{
+    t=*s;
+    while(t!=NULL)
+    {
+      printf("%d ",t->info);
+      t=t->next;
+    }
+  }
+}
+
+
+int getFirst(struct node **s)
+{
+  if(*s==NULL){
+   printf("List is Empty");
+   return -1;
+  }
+  else
+    return *s->info;
+
+}
+
+int getLast(struct node **s)
+{
+  struct node *t;
+  if(*s==NULL)
+  {
+    printf("List is Empty");
+    return -1;
+  }
+  else
+   {
+    t=*s;
+    while(t->next!=NULL)
+     t=t->next;
+
+    return t->info;
+   }
+}
 int main()
 {
-    struct node *start=NULL,*p;
-    p=find(&start,20);
-    insertAtbegin(&start,10)
-    insertAtend(&start,15);
-    insertAfter(&start,p,30);
-    deleteFirst(&start);
-    deleteLast(&start);
+    struct node *start=NULL;
+    insertAtbegin(&start,20);
+    viewList(&start);
     return 0;
 }
