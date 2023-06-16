@@ -10,7 +10,8 @@ void insertAtbegin(struct node **, int);
 void insertAtend(struct node **,int);
 void insertAfter(structn node **, struct node*, int);
 struct node* find(struct node **,int);
-void deleteFirst(struct node **);
+int deleteFirst(struct node **);
+int deleteLast(struct node **);
 
 
 struct node* find(struct node **s, int data)
@@ -101,6 +102,27 @@ int deleteFirst(struct node **s)
    }
 }
 
+int deleteLast(struct node **s)
+{
+  struct node *t;
+  if(*s==NULL)
+   return 0;
+  else if(*s->next==NULL){ 
+    t=*s;
+    *s=NULL;
+    free(t);
+  }
+  else{
+    t=*s;
+    while(t->next!=NULL)
+     t=t->next;
+
+    t->prev->next=NULL;
+    free(t);
+  }
+  return 1;
+}
+
 int main()
 {
     struct node *start=NULL,*p;
@@ -109,5 +131,6 @@ int main()
     insertAtend(&start,15);
     insertAfter(&start,p,30);
     deleteFirst(&start);
+    deleteLast(&start);
     return 0;
 }
