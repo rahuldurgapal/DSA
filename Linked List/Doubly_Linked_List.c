@@ -8,7 +8,7 @@ struct node{
 
 void insertAtbegin(struct node **, int);
 void insertAtend(struct node **,int);
-void insertAfter(structn node **, struct node*, int);
+void insertAfter(struct node **, struct node*, int);
 struct node* find(struct node **,int);
 int deleteFirst(struct node **);
 int deleteLast(struct node **);
@@ -41,14 +41,14 @@ struct node* find(struct node **s, int data)
 void insertAtbegin(struct node **s, int data)
 {
     struct node *p;
-    p=(struct node*)malloc(sizeof(structn node));
+    p=(struct node*)malloc(sizeof(struct node));
     p->info=data;
     p->prev=NULL;
      p->next=*s;
     if(*s==NULL)
      *s=p;
     else{
-        *s->prev=p; 
+        (*s)->prev=p; 
         *s=p;
     }
 
@@ -99,7 +99,7 @@ int deleteFirst(struct node **s)
    else{
     t=*s;
     *s=t->next;
-    *s->prev=NULL;
+    (*s)->prev=NULL;
     free(t);
     return 1;
    }
@@ -110,7 +110,7 @@ int deleteLast(struct node **s)
   struct node *t;
   if(*s==NULL)
    return 0;
-  else if(*s->next==NULL){ 
+  else if((*s)->next==NULL){ 
     t=*s;
     *s=NULL;
     free(t);
@@ -142,7 +142,7 @@ int deleteIntermidiate(struct node **s, struct node *ptr)
   else if(ptr->prev==NULL)
   {
     *s=ptr->next;
-    *s->prev=NULL;
+    (*s)->prev=NULL;
     free(ptr);
   } 
   else if(ptr->next==NULL)
@@ -181,7 +181,7 @@ int getFirst(struct node **s)
    return -1;
   }
   else
-    return *s->info;
+    return (*s)->info;
 
 }
 
