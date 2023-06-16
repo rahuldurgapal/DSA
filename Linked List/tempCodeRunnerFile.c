@@ -1,0 +1,1 @@
+ deleteIntermidiate(&start,ptr);

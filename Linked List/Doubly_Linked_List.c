@@ -134,7 +134,7 @@ int deleteIntermidiate(struct node **s, struct node *ptr)
   struct node *t;
   if(*s==NULL)
    return 0;
-  else if(ptr->next==NULL)
+  else if((*s)->next==NULL)
   {
     *s=NULL;
     free(ptr);
@@ -204,8 +204,16 @@ int getLast(struct node **s)
 }
 int main()
 {
-    struct node *start=NULL;
-    insertAtbegin(&start,20);
+    struct node *start=NULL,*f,*ptr;
+    insertAtbegin(&start,10);
+    insertAtend(&start,20);
+    f=find(&start,10);
+    insertAfter(&start,f,15);
+    printf("First Value is %d\n",getFirst(&start));
+    printf("First Value is %d\n",getLast(&start));
+    deleteIntermidiate(&start,find(&start,20));
+    deleteFirst(&start);
+    deleteLast(&start);
     viewList(&start);
     return 0;
 }
