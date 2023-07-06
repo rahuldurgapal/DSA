@@ -1,1 +1,0 @@
- cout<<s.length()<<endl<<top<<endl;
