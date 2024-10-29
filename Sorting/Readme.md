@@ -36,3 +36,35 @@ This algorithm is a partitioning step often used in the Quick Sort algorithm, wh
      - Set `LOC = LEFT` and go back to Step 2.
 
 ---
+
+### Algorithm Steps
+
+1. **Initialize Stack**:
+   - Set `TOP = -1`.
+
+2. **Initial Setup**:
+   - If `N > 1`, then increment `TOP` by 1 and set:
+     - `LOWER[TOP] = 0`
+     - `UPPER[TOP] = N - 1`
+
+3. **Iterate While Stack is Not Empty**:
+   - Repeat steps 4 to 7 while `TOP != -1`.
+
+4. **Pop Sublist from Stack**:
+   - Set `BEG = LOWER[TOP]`, `END = UPPER[TOP]`, and decrement `TOP` by 1.
+
+5. **Partition the List**:
+   - Call `QUICK(A, N, BEG, END, LOC)` to partition the current sublist.
+
+6. **Push Left Sublist to Stack (if any)**:
+   - If there are elements to the left of `LOC` (`BEG < LOC - 1`), then:
+     - Increment `TOP` by 1.
+     - Set `LOWER[TOP] = BEG` and `UPPER[TOP] = LOC - 1`.
+
+7. **Push Right Sublist to Stack (if any)**:
+   - If there are elements to the right of `LOC` (`LOC + 1 < END`), then:
+     - Increment `TOP` by 1.
+     - Set `LOWER[TOP] = LOC + 1` and `UPPER[TOP] = END`.
+
+---
+
